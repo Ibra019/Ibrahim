@@ -1,7 +1,25 @@
 <?php
-// Koneksi ke database
-$conn = mysqli_connect("localhost", "root", "", "himweekly"); 
-$data = mysqli_query($conn, "SELECT * FROM mahasiswa");
+  
+  //API
+  $koneksi = mysqli_connect("localhost", "root", "", "himweekly"); 
+  
+  $query = "SELECT * FROM mahasiswa";
+  $result = mysqli_query($koneksi, $query);
+
+  $resuit = mysqli_querry($koneksi, $query); /// lemari
+  isi data
+  &mhs = mysqli_fetch_assoc($result);
+
+  var_dump($mhs);
+
+/// ambil data (fetch) dari object result
+/// mysqli_fetch_row() // mengembalikan array numerik
+/// mysqli_fetch_assoc() // mengembalikan array asosiatif
+/// mysqli_fetch_array() // mengembalikan array numerik dan asosiatif
+/// mysqli_fetch_object() // mengembalikan object
+
+  var_dump($ result);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +77,23 @@ $data = mysqli_query($conn, "SELECT * FROM mahasiswa");
             </tr>
 
             <?php 
+            while($mhs = mysqli_fetch_assoc($result)) {
+            ?>
+              <tr>
+                 <td align="center">1</td>
+                 <td> <?php echo $mhs["nama"]; ?></td>
+                 ‹td› ‹?php echo $mhs['nim']; ›>/td>
+                 ‹td align="center"› ‹?php echo $mhs[ jurusan']; ?>/td> 
+                 <td align="center"> <?php echo $mhs['email']; ?></td>
+                 <td align="center"> <?php echo $mhs['no_hp']; ?></td>
+                 <td><img src="assets/images/<?php echo $mhs['foto']; ?> <? echo $mhs[''];
+                        <a href="editdata.php"><button class="btn">Edit</button></a>
+                        <a href="hapusdata.php"><button class="btn">Hapus</button></a>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
             $no = 1; // Membuat nomor urut otomatis
             while($row = mysqli_fetch_assoc($data)) { 
             ?>
