@@ -87,7 +87,7 @@
                 <td>: <input type="color" name="warna"></td>
             </tr>
             <tr>
-                <td>Jenis kelamin</td>
+                <td>Jenis Kelamin</td>
                 <td>: 
                     <input type="radio" id="pria" name="jenis_kelamin" value="Pria">
                     <label for="pria">Pria</label>
