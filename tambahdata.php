@@ -1,4 +1,42 @@
-<!DOCTYPE html>
+<?php
+// 1. Tambah titik koma
+require 'Fungsi.php'; 
+
+// 2. Cek apakah tombol dengan name="submit_pertama" sudah ditekan
+// (Gunakan isset yang benar)
+if(isset($_POST["submit_pertama"])) 
+{
+    $nama = $_POST["nama"];
+    $nim = $_POST["nim"];
+    $email = $_POST["email"];
+    $prodi = $_POST["jurusan"];
+    $nohp = $_POST["nohp"];
+    $foto = $_POST["foto"];
+
+    // 3. Perbaiki penulisan Query SQL (tambah tanda kutip dan VALUES)
+    $query = "INSERT INTO mahasiswa (nama, nim, jurusan, email, no_hp, foto) 
+              VALUES ('$nama', '$nim', '$prodi', '$email', '$nohp', '$foto')";
+    
+    // 4. Gunakan mysqli_query
+    mysqli_query($koneksi, $query);
+    
+    header("location: mahasiswa.php");
+
+    if (mysqli_affected_rows($koneksi)) { ///query ok
+        echo "<script>
+                alert('Data berhasil ditambahkan!');
+                window.location.href = 'mahasiswa.php';
+                document.location.href = 'mahasiswa.php';
+            </script>";
+    } else {
+        echo "<script>
+                alert('Data gagal ditambahkan!');
+                document.location.href = 'mahasiswa.php';
+            </script>";
+    }
+    exit; // Tambahan yang bagus agar script berhenti setelah pindah halaman
+} // 5. Tutup kurung kurawal if
+?> <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,37 +46,37 @@
 </head>
 <body>
     <h2>Tambah Data Mahasiswa</h2>
-    <form action="mahasiswa.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td><label for="nama">Nama</label></td>
+                <td><label for="nama">nama</label></td>
                 <td>:</td>
                 <td><input type="text" id="nama" name="nama" required/></td>
             </tr>
             <tr>
-                <td><label for="nim">NIM</label></td>
+                <td><label for="nim">nim</label></td>
                 <td>:</td>
                 <td><input type="text" id="nim" name="nim"/></td>
             </tr>
             <tr>
-                <td><label for="foto">FOTO</label></td>
+                <td><label for="jurusan">jurusan</label></td>
                 <td>:</td>
-                <td><input type="file" id="foto" name="foto"/></td>
+                <td><input type="text" id="jurusan" name="jurusan"/></td>
             </tr>
             <tr>
-                <td><label for="uts">UTS</label></td>
+                <td><label for="email">email</label></td>
                 <td>:</td>
-                <td><input type="number" id="uts" name="uts"/></td>
+                <td><input type="email" id="Email" name="email"/></td>
             </tr>
             <tr>
-                <td><label for="uas">UAS</label></td>
+                <td><label for="nohp">Nomor HP</label></td>
                 <td>:</td>
-                <td><input type="number" id="uas" name="uas"/></td>
+                <td><input type="number" id="nohp" name="nohp"/></td>
             </tr>
             <tr>
-                <td><label for="tugas">Tugas</label></td>
+                <td><label for="foto">foto</label></td>
                 <td>:</td>
-                <td><input type="number" id="tugas" name="tugas"/></td>
+                <td><input type="text" id="foto" name="foto"/></td>
             </tr>
             <tr>
                 <td colspan="3">
