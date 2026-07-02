@@ -1,42 +1,26 @@
 <?php
-// 1. Tambah titik koma
-require 'Fungsi.php'; 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+require 'Fungsi.php';
 
-// 2. Cek apakah tombol dengan name="submit_pertama" sudah ditekan
-// (Gunakan isset yang benar)
-if(isset($_POST["submit_pertama"])) 
-{
-    $nama = $_POST["nama"];
-    $nim = $_POST["nim"];
-    $email = $_POST["email"];
-    $prodi = $_POST["jurusan"];
-    $nohp = $_POST["nohp"];
-    $foto = $_POST["foto"];
+if (isset($_POST["submit_pertama"])) {
 
-    // 3. Perbaiki penulisan Query SQL (tambah tanda kutip dan VALUES)
-    $query = "INSERT INTO mahasiswa (nama, nim, jurusan, email, no_hp, foto) 
-              VALUES ('$nama', '$nim', '$prodi', '$email', '$nohp', '$foto')";
-    
-    // 4. Gunakan mysqli_query
-    mysqli_query($koneksi, $query);
-    
-    header("location: mahasiswa.php");
-
-    if (mysqli_affected_rows($koneksi)) { ///query ok
+    if (tambahdata($_POST) > 0) {
         echo "<script>
                 alert('Data berhasil ditambahkan!');
-                window.location.href = 'mahasiswa.php';
-                document.location.href = 'mahasiswa.php';
-            </script>";
+                document.location.href='Mahasiswa.php';
+              </script>";
     } else {
         echo "<script>
                 alert('Data gagal ditambahkan!');
-                document.location.href = 'mahasiswa.php';
-            </script>";
+                document.location.href='tambahdata.php';
+              </script>";
     }
-    exit; // Tambahan yang bagus agar script berhenti setelah pindah halaman
-} // 5. Tutup kurung kurawal if
-?> <!DOCTYPE html>
+
+    exit;
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -76,7 +60,7 @@ if(isset($_POST["submit_pertama"]))
             <tr>
                 <td><label for="foto">foto</label></td>
                 <td>:</td>
-                <td><input type="text" id="foto" name="foto"/></td>
+                <td><input type="file" id="foto" name="foto"/></td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -174,3 +158,5 @@ if(isset($_POST["submit_pertama"]))
 
 </body>
 </html>
+
+

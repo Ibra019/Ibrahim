@@ -66,12 +66,12 @@ $data_mahasiswa = tampildata("SELECT * FROM mahasiswa");
             <td><?php echo $row['email']; ?></td>
             <td><?php echo $row['no_hp']; ?></td>
             <td align="center">
-                <img src="assets/images/<?php echo $row['foto']; ?>" width="80">
+                <img src="asset/image/<?php echo $row['foto']; ?>" width="80">
             </td>
             <td align="center">
-                <a href="editdata.php?id=<?php echo $row['id']; ?>">Edit</a>
-                <a href="hapusdata.php?id=<?php echo $row['id']; ?>">Hapus</a>
-            </td>
+            <a href="editdata.php?id=<?= $row['id']; ?>">Edit</a> |
+            <a href="deletedata.php?id=<?= $row['id']; ?>" onclick="return confirm('Yakin ingin menghapus data?');">Hapus</a>
+       </td>
         </tr>
         <?php } ?>
 
